@@ -15,6 +15,7 @@ async function start() {
         .setTitle('Management Boards SERVER')
         .setDescription('Management Boards REAST API Documentation for test task InCode Group')
         .setVersion('1.0.0')
+        .addServer(`https://managemen-boards.onrender.com/`)
         .addServer(`http://localhost:${PORT}`)
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
