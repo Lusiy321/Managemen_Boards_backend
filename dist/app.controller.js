@@ -88,7 +88,7 @@ __decorate([
         summary: 'Get dashboard by id',
     }),
     (0, swagger_1.ApiResponse)({ status: 200, type: dashboard_model_1.Dashboard }),
-    (0, common_1.Get)('/:id'),
+    (0, common_1.Get)('/board/:id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

@@ -41,7 +41,7 @@ export class AppController {
     summary: 'Get dashboard by id',
   })
   @ApiResponse({ status: 200, type: Dashboard })
-  @Get('/:id')
+  @Get('/board/:id')
   async findDashboardById(@Param('id') id: string): Promise<Dashboard> {
     return await this.appService.findDashboardById(id);
   }
