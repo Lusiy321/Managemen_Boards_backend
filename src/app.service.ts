@@ -112,7 +112,11 @@ export class AppService {
       throw new NotFound('Cards not found');
     }
   }
-  async createCard(title: string, dashboardId: string): Promise<Card> {
+  async createCard(
+    title: string,
+    description: string,
+    dashboardId: string,
+  ): Promise<Card> {
     try {
       const find = await this.cardModel.findOne({ title: title }).exec();
       const checkName = title.trim();
@@ -122,6 +126,7 @@ export class AppService {
       if (!find) {
         const newCard = await this.cardModel.create({
           title: checkName,
+          description: description,
           dashboard: dashboardId,
         });
         const result = await newCard.save();

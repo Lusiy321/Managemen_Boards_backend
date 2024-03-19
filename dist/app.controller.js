@@ -48,8 +48,8 @@ let AppController = class AppController {
     async findCardByBoardId(boardId) {
         return await this.appService.findCardsByBoardId(boardId);
     }
-    async createCard(title, boardId) {
-        return await this.appService.createCard(title, boardId);
+    async createCard(title, description, boardId) {
+        return await this.appService.createCard(title, description, boardId);
     }
     async updateCard(id, params) {
         return await this.appService.updateCard(id, params);
@@ -153,11 +153,12 @@ __decorate([
         summary: 'Create card',
     }),
     (0, swagger_1.ApiResponse)({ status: 201, type: card_model_1.Card }),
-    (0, common_1.Post)('/create-card/:title/:boardId'),
+    (0, common_1.Post)('/create-card/:title/:description/:boardId'),
     __param(0, (0, common_1.Param)('title')),
-    __param(1, (0, common_1.Param)('boardId')),
+    __param(1, (0, common_1.Param)('description')),
+    __param(2, (0, common_1.Param)('boardId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:paramtypes", [String, String, String]),
     __metadata("design:returntype", Promise)
 ], AppController.prototype, "createCard", null);
 __decorate([

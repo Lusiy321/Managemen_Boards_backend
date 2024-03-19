@@ -14,7 +14,7 @@ export declare class AppController {
     deleteDashboard(id: string): Promise<Dashboard>;
     findAllCards(): Promise<Card[]>;
     findCardByBoardId(boardId: string): Promise<Card[]>;
-    createCard(title: string, boardId: string): Promise<Card>;
+    createCard(title: string, description: string, boardId: string): Promise<Card>;
     updateCard(id: string, params: UpdateCardDto): Promise<Card>;
     deleteCard(id: string): Promise<Card>;
     changeBoardFromCard(id: string, boardId: string): Promise<Card>;

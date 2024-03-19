@@ -12,7 +12,7 @@ export declare class AppService {
     deleteDashboard(id: string): Promise<Dashboard>;
     findAllCards(): Promise<Card[]>;
     findCardsByBoardId(boardId: string): Promise<Card[]>;
-    createCard(title: string, dashboardId: string): Promise<Card>;
+    createCard(title: string, description: string, dashboardId: string): Promise<Card>;
     updateCard(id: string, params: any): Promise<Card>;
     deleteCard(id: string): Promise<Card>;
     changeBoardFromCard(id: string, dashboardId: string): Promise<any>;

@@ -93,12 +93,13 @@ export class AppController {
     summary: 'Create card',
   })
   @ApiResponse({ status: 201, type: Card })
-  @Post('/create-card/:title/:boardId')
+  @Post('/create-card/:title/:description/:boardId')
   async createCard(
     @Param('title') title: string,
+    @Param('description') description: string,
     @Param('boardId') boardId: string,
   ): Promise<Card> {
-    return await this.appService.createCard(title, boardId);
+    return await this.appService.createCard(title, description, boardId);
   }
   @ApiOperation({
     summary: 'Update card',

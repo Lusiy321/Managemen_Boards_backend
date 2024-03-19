@@ -123,7 +123,7 @@ let AppService = class AppService {
             throw new http_errors_1.NotFound('Cards not found');
         }
     }
-    async createCard(title, dashboardId) {
+    async createCard(title, description, dashboardId) {
         try {
             const find = await this.cardModel.findOne({ title: title }).exec();
             const checkName = title.trim();
@@ -133,6 +133,7 @@ let AppService = class AppService {
             if (!find) {
                 const newCard = await this.cardModel.create({
                     title: checkName,
+                    description: description,
                     dashboard: dashboardId,
                 });
                 const result = await newCard.save();
