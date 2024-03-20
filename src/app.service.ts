@@ -26,18 +26,26 @@ export class AppService {
   async findDashboardByName(name: string): Promise<Dashboard> {
     try {
       const find = await this.dashboardModel.findOne({ name: name }).exec();
-      return find;
+      if (!find) {
+        throw new NotFound('Dashboards not found');
+      } else {
+        return find;
+      }
     } catch (e) {
-      throw new NotFound('Dashboards not found');
+      throw e;
     }
   }
 
   async findDashboardById(id: string): Promise<Dashboard> {
     try {
       const find = await this.dashboardModel.findById(id).exec();
-      return find;
+      if (!find) {
+        throw new NotFound('Dashboards not found');
+      } else {
+        return find;
+      }
     } catch (e) {
-      throw new NotFound('Dashboards not found');
+      throw e;
     }
   }
 
@@ -96,7 +104,6 @@ export class AppService {
 
   async findAllCards(): Promise<Card[]> {
     try {
-      console.log('tyt');
       const find = await this.cardModel.find().exec();
       return find;
     } catch (e) {
@@ -140,20 +147,20 @@ export class AppService {
   }
 
   async updateCard(id: string, params: any): Promise<Card> {
-    // try {
-    const find = await this.cardModel.findById(id).exec();
-    if (find) {
-      console.log(params);
-      const result = await this.cardModel
-        .findByIdAndUpdate({ _id: id }, params, { new: true })
-        .exec();
-      return result;
-    } else {
-      throw new NotFound('Cards not found');
+    try {
+      const find = await this.cardModel.findById(id).exec();
+      if (find) {
+        console.log(params);
+        const result = await this.cardModel
+          .findByIdAndUpdate({ _id: id }, params, { new: true })
+          .exec();
+        return result;
+      } else {
+        throw new NotFound('Cards not found');
+      }
+    } catch (e) {
+      throw new NotFound(e);
     }
-    // } catch (e) {
-    //   throw new NotFound(e);
-    // }
   }
 
   async deleteCard(id: string): Promise<Card> {

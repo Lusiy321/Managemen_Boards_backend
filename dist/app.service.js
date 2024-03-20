@@ -35,19 +35,29 @@ let AppService = class AppService {
     async findDashboardByName(name) {
         try {
             const find = await this.dashboardModel.findOne({ name: name }).exec();
-            return find;
+            if (!find) {
+                throw new http_errors_1.NotFound('Dashboards not found');
+            }
+            else {
+                return find;
+            }
         }
         catch (e) {
-            throw new http_errors_1.NotFound('Dashboards not found');
+            throw e;
         }
     }
     async findDashboardById(id) {
         try {
             const find = await this.dashboardModel.findById(id).exec();
-            return find;
+            if (!find) {
+                throw new http_errors_1.NotFound('Dashboards not found');
+            }
+            else {
+                return find;
+            }
         }
         catch (e) {
-            throw new http_errors_1.NotFound('Dashboards not found');
+            throw e;
         }
     }
     async createDashboard(name) {
@@ -106,7 +116,6 @@ let AppService = class AppService {
     }
     async findAllCards() {
         try {
-            console.log('tyt');
             const find = await this.cardModel.find().exec();
             return find;
         }
@@ -148,16 +157,21 @@ let AppService = class AppService {
         }
     }
     async updateCard(id, params) {
-        const find = await this.cardModel.findById(id).exec();
-        if (find) {
-            console.log(params);
-            const result = await this.cardModel
-                .findByIdAndUpdate({ _id: id }, params, { new: true })
-                .exec();
-            return result;
+        try {
+            const find = await this.cardModel.findById(id).exec();
+            if (find) {
+                console.log(params);
+                const result = await this.cardModel
+                    .findByIdAndUpdate({ _id: id }, params, { new: true })
+                    .exec();
+                return result;
+            }
+            else {
+                throw new http_errors_1.NotFound('Cards not found');
+            }
         }
-        else {
-            throw new http_errors_1.NotFound('Cards not found');
+        catch (e) {
+            throw new http_errors_1.NotFound(e);
         }
     }
     async deleteCard(id) {
